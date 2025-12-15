@@ -1,0 +1,33 @@
+# These ignored file are just for testing
+# Swap/undo directories
+*.swp
+*.swo
+*.un~
+*.undo
+*.bak
+
+# Python cache
+__pycache__/
+
+# Lua formatter / stylua
+.stylua.toml
+
+# Lazy.nvim lock file (optional to ignore)
+lazy-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# files
+TODOS.md
+test.py
+prime.py
+test_prime.py
+test.md
+test.js
+rust.rs
+
+# env file
+*.env
+

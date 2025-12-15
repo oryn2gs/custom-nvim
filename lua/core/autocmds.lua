@@ -1,0 +1,2 @@
+-- autocmds: https://neovim.io/doc/user/autocmd.html
+-- here's the list of default events
