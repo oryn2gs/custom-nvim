@@ -54,12 +54,13 @@ require("lazy").setup({
   {
     "tpope/vim-fugitive",
     cmd = { "G", "Git" }, -- lazy-load when these commands are used
-    -- keys = {
-    --   { "<leader>gs", ":G<CR>", desc = "Git status" },
-    --   { "<leader>gc", ":Git commit<CR>", desc = "Git commit" },
-    --   { "<leader>gp", ":Git push<CR>", desc = "Git push" },
-    --   { "<leader>gl", ":Git pull<CR>", desc = "Git pull" },
-    -- },
+    keys = {
+      { "<leader>gg", ":Git<CR>", desc = "Git interactive window" },
+      { "<leader>gs", ":Git status<CR>", desc = "Git status" },
+      { "<leader>gc", ":Git commit<CR>", desc = "Git commit" },
+      { "<leader>gp", ":Git push<CR>", desc = "Git push" },
+      { "<leader>gl", ":Git pull<CR>", desc = "Git pull" },
+    },
   }
 
 }, {
