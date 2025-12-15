@@ -13,5 +13,5 @@ else
   require "core.highlights" -- autocmds
 
   -- Plugins
-  -- require "plugins.lazy" -- Lazy.nvim bootstrap and plugin loader
+  require "plugins.lazy" -- Lazy.nvim bootstrap and plugin loader
 end
