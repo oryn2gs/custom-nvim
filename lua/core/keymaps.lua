@@ -33,3 +33,35 @@ map("n", "<leader>w-", "<C-w>-",  opts  "Window height decrease" )
 
 -- Nvim tree mappings
 map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", opts "Nvimtree Toggle window" )
+
+-- Telecope mappings
+map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope find media files" })
+map("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Telescope find todos" })
+-- map("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc = "Telescope find recent files" })
+
+-- Noice Mappings
+map("n", "<leader>nm", "<cmd>Noice telescope<CR>", { desc = "Noice messages in telescope." })
+map("n", "<leader>ne", "<cmd>Noice errors<CR>", { desc = "Noice errors message." })
+
+-- Todo Comments
+map("n", "<leader>tn", function()
+  require("todo-comments").jump_next()
+end, { desc = "Todo comments jump next" })
+map("n", "<leader>tp", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Todo comments jump prev" })
+
+
+-- bufferline mappings
+-- TODO: check bufferline to create keymaps
+-- function to delete buffers except the active one
+function delete_other_buffers()
+  local current_buffer = vim.api.nvim_get_current_buf()
+  local all_buffers = vim.api.nvim_list_bufs()
+  for _, buffer in ipairs(all_buffers) do
+    if buffer ~= current_buffer then
+      vim.api.nvim_buf_delete(buffer, { force = true })
+    end
+  end
+end
+map("n", "<leader>bo", ":lua delete_other_buffers()<CR>",  opts  "Buffer close all other" )

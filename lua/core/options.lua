@@ -7,6 +7,7 @@ vim.g.mapleader=" "
 vim.o.number = true             -- show line numbers
 vim.o.relativenumber = true     -- show relative line numbers
 vim.o.cursorline = true         -- highlight current line
+vim.o.cursorlineopt = "both"          -- enable cursorline for both screen line and line number
 vim.o.termguicolors = true      -- enable 24-bit colors
 vim.o.signcolumn = "yes"        -- always show sign column (for git/gitsigns)
 
@@ -16,6 +17,8 @@ vim.o.shiftwidth = 2            -- number of spaces for each indentation
 vim.o.tabstop = 2               -- number of spaces a tab counts for
 vim.o.smartindent = true        -- auto-indent new lines
 vim.o.autoindent = true         -- copy indent from current line
+vim.o.breakindent = true               -- visually indent wrapped lines to match the start of the line
+vim.o.backspace = "indent,eol,start"  -- allow backspace over autoindent, line breaks, and start of insert
 vim.o.wrap = false              -- disable line wrapping
 
 -- Searching
@@ -42,6 +45,11 @@ vim.o.splitbelow = true         -- horizontal splits open below
 -- vim.o.sidescrolloff = 8
 vim.o.lazyredraw = true         -- faster macros and regex
 vim.o.updatetime = 300          -- faster CursorHold events
+
+-- Folding
+-- vim.o.foldmethod = "manual"           -- use manual folding (you control folds)
+-- vim.o.foldopen = "all"                 -- when opening a fold, open all contained folds
+-- vim.o.foldclose = "all"                -- when closing a fold, close all contained folds
 
 -- Disable some built-in plugins if desired
 -- vim.g.loaded_netrw = 1
