@@ -1,11 +1,19 @@
 -- noice: 
-
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
       "munifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
+    },
+    keys = {
+      { "<leader>nt", "<cmd>Noice telescope<CR>", desc = "Noice messages in telescope." },
+      { "<leader>ne", "<cmd>Noice errors<CR>", desc = "Noice errors message." },
+      { "<leader>nd", "<cmd>Noice dismiss<CR>", desc = "Noice dismiss visible messages." },
+      { "<leader>nl", "<cmd>Noice last<CR>", desc = "Noice show last error." },
+      { "<leader>ns", "<cmd>Noice stats<CR>", desc = "Noice noice stats." },
+      { "<leader>nE", "<cmd>Noice enable<CR>", desc = "Noice noice enable." },
+      { "<leader>nD", "<cmd>Noice disable<CR>", desc = "Noice noice disable." },
     },
     opts = {
       background_color = "#000000",

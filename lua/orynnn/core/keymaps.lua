@@ -38,17 +38,6 @@ map("n", "<leader>wj", "<C-w>j",  opts  "Window navigate bottom" )
 map("n", "<leader>wk", "<C-w>k",  opts  "Window navigate top" )
 map("n", "<leader>wl", "<C-w>l",  opts  "Window navigate right" )
 
--- Nvim tree mappings
-map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", opts "Nvimtree Toggle window" )
-
--- Telecope mappings
-map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope find media files" })
-map("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Telescope find todos" })
--- map("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc = "Telescope find recent files" })
-
--- Noice Mappings
-map("n", "<leader>nm", "<cmd>Noice telescope<CR>", { desc = "Noice messages in telescope." })
-map("n", "<leader>ne", "<cmd>Noice errors<CR>", { desc = "Noice errors message." })
 
 -- Todo Comments
 map("n", "<leader>tn", function()
@@ -77,3 +66,47 @@ map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Go to previous buf
 map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete current buffer" })
 -- map("n", "<leader>bL", "<cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
 -- map("n", "<leader>bR", "<cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
+
+-- Terminal mappings
+-- TODO: presistent state for terminal or checkout  "akinsho/toggleterm.nvim"
+-- map("n", "<leader>tt", function()
+--   vim.cmd("vsplit | terminal")
+-- end, opts  "Terminal Vertical" )
+-- map("n", "<leader>th", function()
+--   vim.cmd("split | terminal")
+-- end, { desc = "Terminal Horizontal" })
+-- map("t", "<Esc>", [[<C-\><C-n>]], opts  "Terminal exit to terminal mode" )
+
+-- -- Keep track of the last terminal buffer
+-- local last_term_buf = nil
+--
+-- -- Function to open terminal in horizontal or vertical split
+-- local function toggle_terminal(direction)
+--   if last_term_buf and vim.api.nvim_buf_is_valid(last_term_buf) then
+--     -- Terminal exists: open in requested split
+--     if direction == "horizontal" then
+--       vim.cmd("split | buffer " .. last_term_buf)
+--     elseif direction == "vertical" then
+--       vim.cmd("vsplit | buffer " .. last_term_buf)
+--     end
+--     vim.cmd("startinsert")
+--     return
+--   end
+--
+--   -- Terminal doesn't exist: create new one
+--   if direction == "horizontal" then
+--     vim.cmd("split | terminal")
+--   elseif direction == "vertical" then
+--     vim.cmd("vsplit | terminal")
+--   end
+--
+--   last_term_buf = vim.api.nvim_get_current_buf()
+--   vim.cmd("startinsert")
+-- end
+--
+-- -- Keymaps for toggling terminal
+-- vim.keymap.set("n", "<leader>th", function() toggle_terminal("horizontal") end, { desc = "Toggle Horizontal Terminal" })
+-- vim.keymap.set("n", "<leader>tt", function() toggle_terminal("vertical") end, { desc = "Toggle Vertical Terminal" })
+--
+-- -- Exit terminal mode without closing session
+-- vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode", noremap = true, silent = true })

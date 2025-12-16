@@ -5,11 +5,11 @@ return {
     "tpope/vim-fugitive",
     cmd = { "G", "Git" },
     keys = {
-      { "<leader>gg", ":Git<CR>", desc = "Git interactive window" },
-      { "<leader>gs", ":Git status<CR>", desc = "Git status" },
-      { "<leader>gc", ":Git commit<CR>", desc = "Git commit" },
-      { "<leader>gp", ":Git push<CR>", desc = "Git push" },
-      { "<leader>gl", ":Git pull<CR>", desc = "Git pull" },
+      { "<leader>gf", ":Git<CR>", desc = "Git interactive window - vim-fugitive" },
+      { "<leader>gs", ":Git status<CR>", desc = "Git status - vim-fugitive" },
+      { "<leader>gc", ":Git commit<CR>", desc = "Git commit - vim-fugitive" },
+      { "<leader>gp", ":Git push<CR>", desc = "Git push - vim-fugitive" },
+      { "<leader>gF", ":Git pull<CR>", desc = "Git pull - vim-fugitive" },
     },
   },
   {

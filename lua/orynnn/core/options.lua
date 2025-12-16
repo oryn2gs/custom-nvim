@@ -19,7 +19,8 @@ vim.o.smartindent = true        -- auto-indent new lines
 vim.o.autoindent = true         -- copy indent from current line
 vim.o.breakindent = true               -- visually indent wrapped lines to match the start of the line
 vim.o.backspace = "indent,eol,start"  -- allow backspace over autoindent, line breaks, and start of insert
-vim.o.wrap = false              -- disable line wrapping
+vim.o.wrap = true              -- disable line wrapping
+vim.o.showbreak = "↪ "         -- string to show at the start of wrapped lines
 
 -- Searching
 vim.o.ignorecase = true         -- case-insensitive search

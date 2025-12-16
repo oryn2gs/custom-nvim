@@ -13,9 +13,8 @@ return {
   },
   cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeCollapse" }, -- lazy-load on these commands
   keys = {
-    { "<leader>ub", ":NvimTreeToggle<CR>", desc = "Nvim Tree Toggle File Explorer" },
-    { "<leader>e", ":NvimTreeFocus<CR>", desc = "Nvim Tree Focus File Explorer" },
-    { "<C-w>", ":NvimTreeCollapse<CR>", desc = "Nvim Tree Collapse" },
+    { "<leader>nt", "<cmd>NvimTreeToggle<CR>", desc = "Nvim Tree Toggle File Explorer" },
+    { "<leader>nT", "<cmd>NvimTreeFocus<CR>", desc = "Nvim Tree Focus File Explorer" },
   },
   config = function()
     require("nvim-tree").setup({ disable_netrw = true,       -- disable default netrw hijack_netrw = true,        -- takeover netrw
@@ -68,6 +67,8 @@ return {
         api.config.mappings.default_on_attach(bufnr)
 
         -- custom mappings
+        map("n", "<C-w>", function() api.tree.collapse_all({keep_buffers=false})end, opts "Nvim Tree Collapse" )
+        map("n", "<C-c>", function() api.tree.collapse_all({keep_buffers=true})end, opts "Nvim Tree Collapse not the directory with open buffers." )
         map("n", "D", api.fs.remove, opts "Delete")
         map("n", "d", api.fs.trash, opts "Trash")
         map("n", "<C-s>", function() -- open file/folder under the cursor in system default application
