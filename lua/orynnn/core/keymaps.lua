@@ -20,6 +20,24 @@ map("n", "<C-s>", "<cmd>w<CR>", opts "Save current buffer" )
 map("n", "<C-c>", 'gg"+yG', opts("Copy entire buffer"))
 map("i", "jj", "<ESC>",  opts "Exit insert mode" )
 
+-- Better indenting and navigation
+map("n", "J", "mzJ`z", opts "move line down without moving cursor" )
+map("n", "<C-d>", "<C-d>zz", opts "move down in buffer with cursor centered" )
+map("n", "<C-u>", "<C-u>zz", opts "move up in buffer with cursor centered" )
+map("n", "n", "nzzzv", opts "move to next search result with cursor centered" )
+map("n", "N", "Nzzzv", opts "move to previous search result with cursor centered" )
+
+map("v", "<", "<gv", opts  "better indenting in visual mode" )
+map("v", ">", ">gv", opts  "better indenting in visual mode" )
+
+-- ctrl c as escape cuz Im lazy to reach up to the esc key
+map("i", "<C-c>", "<Esc>", opts  "Exit insert mode" )
+map("n", "<C-c>", ":nohl<CR>", opts "Clear search hl")
+map("n", "<leader>fk", vim.lsp.buf.format)
+
+-- Executes shell command from in here making file executable
+map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })
+
 
 -- NVIM window management
 map("n", "<leader>ws", ":split<Return>",  opts  "Window split horizontally" )
@@ -48,24 +66,6 @@ map("n", "<leader>tp", function()
 end, { desc = "Todo comments jump prev" })
 
 
--- bufferline mappings
--- TODO: check bufferline to create keymaps
--- function to delete buffers except the active one
-function delete_other_buffers()
-  local current_buffer = vim.api.nvim_get_current_buf()
-  local all_buffers = vim.api.nvim_list_bufs()
-  for _, buffer in ipairs(all_buffers) do
-    if buffer ~= current_buffer then
-      vim.api.nvim_buf_delete(buffer, { force = true })
-    end
-  end
-end
-map("n", "<leader>bo", ":lua delete_other_buffers()<CR>",  opts  "Buffer close all other" )
-map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Go to next buffer" })
-map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Go to previous buffer" })
-map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete current buffer" })
--- map("n", "<leader>bL", "<cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
--- map("n", "<leader>bR", "<cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
 
 -- Terminal mappings
 -- TODO: presistent state for terminal or checkout  "akinsho/toggleterm.nvim"

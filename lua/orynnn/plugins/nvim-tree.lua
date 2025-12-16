@@ -13,8 +13,8 @@ return {
   },
   cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeCollapse" }, -- lazy-load on these commands
   keys = {
-    { "<leader>nt", "<cmd>NvimTreeToggle<CR>", desc = "Nvim Tree Toggle File Explorer" },
-    { "<leader>nT", "<cmd>NvimTreeFocus<CR>", desc = "Nvim Tree Focus File Explorer" },
+    { "<leader>ub", "<cmd>NvimTreeToggle<CR>", desc = "Nvim Tree toggle" },
+    { "<leader>e", "<cmd>NvimTreeFocus<CR>", desc = "Nvim Tree" },
   },
   config = function()
     require("nvim-tree").setup({ disable_netrw = true,       -- disable default netrw hijack_netrw = true,        -- takeover netrw

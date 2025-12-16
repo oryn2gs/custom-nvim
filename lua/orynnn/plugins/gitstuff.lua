@@ -32,5 +32,16 @@ return {
         -- See `:help gitsigns.txt`
       }
     end,
-  }
+  },
+  -- git worktree, for managing github worktrees in nvim
+  {
+    "ThePrimeagen/git-worktree.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("git-worktree").setup({
+        -- optional configuration
+        update_on_change = true,  -- auto-update telescope after switching
+      })
+    end,
+  },
 }

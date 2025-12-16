@@ -60,15 +60,14 @@ return {
           lsp_doc_border = false, -- add a border to hover docs and signature help
         },
 
-        --show recording with noice
+        -- show recording with noice
         -- INFO: uncomment to show recording with noice -- using NvChad UI statusline to show recording
-        --
-        -- routes = {
-        --   {
-        --     view = "notify",
-        --     filter = { event = "msg_showmode" },
-        --   },
-        -- },
+        routes = {
+          {
+            view = "notify",
+            filter = { event = "msg_showmode" },
+          },
+        },
           
         },
     -- FIX: need to fix the auto entering lsp "hover" view -
