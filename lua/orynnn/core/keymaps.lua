@@ -11,10 +11,13 @@ local function opts(desc)
   return { desc = desc, noremap = true, silent = true }
 end
 
+--keymaps
 
 -- Basic mappings
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>",  opts "Save all and exit" )
 map("n", "<C-a>", "gg<S-v>G", opts "Select all in the buffer" )
+map("n", "<C-s>", "<cmd>w<CR>", opts "Save current buffer" )
+map("n", "<C-c>", 'gg"+yG', opts("Copy entire buffer"))
 map("i", "jj", "<ESC>",  opts "Exit insert mode" )
 
 
@@ -30,6 +33,10 @@ map("n", "<leader>w>", "<C-w>>",  opts  "Window width increase" )
 map("n", "<leader>w<", "<C-w><",  opts  "Window width decrease" )
 map("n", "<leader>w+", "<C-w>+",  opts  "Window height increase" )
 map("n", "<leader>w-", "<C-w>-",  opts  "Window height decrease" )
+map("n", "<leader>wh", "<C-w>h",  opts  "Window navigate left" )
+map("n", "<leader>wj", "<C-w>j",  opts  "Window navigate bottom" )
+map("n", "<leader>wk", "<C-w>k",  opts  "Window navigate top" )
+map("n", "<leader>wl", "<C-w>l",  opts  "Window navigate right" )
 
 -- Nvim tree mappings
 map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", opts "Nvimtree Toggle window" )
@@ -65,3 +72,8 @@ function delete_other_buffers()
   end
 end
 map("n", "<leader>bo", ":lua delete_other_buffers()<CR>",  opts  "Buffer close all other" )
+map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Go to next buffer" })
+map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Go to previous buffer" })
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete current buffer" })
+-- map("n", "<leader>bL", "<cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
+-- map("n", "<leader>bR", "<cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })

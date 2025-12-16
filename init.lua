@@ -7,11 +7,15 @@ else
   -- Loads core settings first, then plugins
 
   -- Core settings
-  require "core.options" -- vim.o options
-  require "core.keymaps" -- custom keymaps
-  require "core.autocmds" -- autocmds
-  require "core.highlights" -- autocmds
+  -- require "core.options" -- vim.o options
+  -- require "core.keymaps" -- custom keymaps
+  -- require "core.autocmds" -- autocmds
+  -- require "core.highlights" -- autocmds
+  require "orynnn.core.options" -- vim.o options
+  require "orynnn.core.keymaps" -- custom keymaps
+  require "orynnn.core.autocmds" -- autocmds
+  require "orynnn.core.highlights" -- autocmds
 
-  -- Plugins
-  require "plugins.lazy" -- Lazy.nvim bootstrap and plugin loader
+  -- Plugins require "plugins.lazy" -- Lazy.nvim bootstrap and plugin loader
+  require "orynnn.lazy" -- Lazy.nvim bootstrap and plugin loader
 end
