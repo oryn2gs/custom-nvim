@@ -31,8 +31,9 @@ map("v", "<", "<gv", opts  "better indenting in visual mode" )
 map("v", ">", ">gv", opts  "better indenting in visual mode" )
 
 -- ctrl c as escape cuz Im lazy to reach up to the esc key
-map("i", "<C-c>", "<Esc>", opts  "Exit insert mode" )
-map("n", "<C-c>", ":nohl<CR>", opts "Clear search hl")
+-- FIX: use other keys
+-- map("i", "<C-c>", "<Esc>", opts  "Exit insert mode" )
+map("n", "<Esc>", ":nohl<CR>", opts "Clear search hl")
 map("n", "<leader>fk", vim.lsp.buf.format)
 
 -- Executes shell command from in here making file executable

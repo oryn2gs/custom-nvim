@@ -2,8 +2,8 @@ return {
   "rmagatti/auto-session",
   lazy = false,
   keys = {
-    { "<leader>sc", "<cmd>SessionRestore<CR>", desc = "Auto session restore." }, -- restore last workspace session for current directory
-    { "<leader>ss", "<cmd>SessionSave<CR>", desc = "Auto Session Save" }, -- save workspace session for current working directory
+    { "<leader>sc", "<cmd>AutoSession restore<CR>", desc = "Auto session restore." }, -- restore last workspace session for current directory
+    { "<leader>ss", "<cmd>AutoSession save<CR>", desc = "Auto Session Save" }, -- save workspace session for current working directory
   },
   ---enables autocomplete for opts
   ---@module "auto-session"

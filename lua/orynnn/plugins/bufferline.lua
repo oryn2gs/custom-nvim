@@ -16,7 +16,7 @@ return {
     { "<leader>bn", "<cmd>BufferLineMoveNext<CR>", { desc = "Bufferline move buffer right" } },
     { "<leader>bN", "<cmd>BufferLineCloseRight<CR>", { desc = "Bufferline close buffer right" } },
     { "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "Bufferline close other buffers" } },
-    { "<leader>bd", "<cmd>bdelete<CR>", desc = "Bufferline current buffer" }
+    { "<leader>bd", "<cmd>bdelete<CR>", desc = "Bufferline current buffer" },
   
     -- buffer line index shortcut
     {"<leader>1", "<cmd>lua require('bufferline').go_to(1, true)<cr>", {desc = "Bufferline go to buffer 1" } },

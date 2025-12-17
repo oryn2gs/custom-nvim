@@ -26,6 +26,18 @@ return {
         },
       }
       vim.cmd("colorscheme onedark")
+-- === Highlight overrides to #CEB422 ===
+      local highlights = {
+        ["@attribute"] = { fg = "#CEB422", bold = true },
+        ["@function"] = { fg = "#fff" },
+        ["@conditional.python"] = { fg = "#fff" },
+        ["@constant.builtin"] = { fg = "#fff" },
+
+      }
+
+      for group, hl in pairs(highlights) do
+        vim.api.nvim_set_hl(0, group, hl)
+      end
     end,
   }
 
