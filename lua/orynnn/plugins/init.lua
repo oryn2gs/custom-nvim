@@ -3,27 +3,6 @@
 --
 -- TODO:    wilder, mini module
 return {
-  -- whichkey
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-      preset = "modern"
-    },
-    keys = {
-      {
-        "<leader>?",
-        function()
-          require("which-key").show({ global = false })
-        end,
-        desc = "Buffer Local Keymaps (which-key)",
-      },
-    },
-  },
-
   -- todo comments
   {
   "folke/todo-comments.nvim",
@@ -34,20 +13,6 @@ return {
     -- refer to the configuration section below
     }
   },
-
-
-  -- vim surround 
-  {
-    "kylechui/nvim-surround",
-    version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
-    end
-  },
-  
 
 
   -- nvim colorizer -- 
@@ -66,7 +31,7 @@ return {
 
 
   -- undotree
-  -- -- FIX: the undotree render
+  --  FIX: the undotree render
   {
     "mbbill/undotree",
     config = function()

@@ -11,6 +11,7 @@ else
   require "orynnn.core.keymaps" -- custom keymaps
   require "orynnn.core.autocmds" -- autocmds
   require "orynnn.core.highlights" -- autocmds
+  require("orynnn.core.commands").setup()
 
   -- Plugins
   require "orynnn.lazy" -- Lazy.nvim bootstrap and plugin loader
