@@ -5,8 +5,6 @@
 vim.g.mapleader = " "
 
 local map = vim.keymap.set
-
-
 -- opts
 local function opts(desc)
   return { desc = desc, noremap = true, silent = true }

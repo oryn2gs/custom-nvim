@@ -12,13 +12,13 @@ return {
       {"<Tab>", "<cmd>BufferLineCycleNext<CR>", desc = "Bufferline Next Buffer" },
       {"<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", desc = "Bufferline Previous Buffer" },
       {"<leader>bc", "<cmd>BufferLinePick<CR>", desc = "Bufferline pick to open" },
-      {"<leader>bx", "<cmd>BufferLinePickClose<CR>", desc = "Bufferline pick to Close" },
+      {"<leader>bx", "<cmd>wa | BufferLinePickClose<CR>", desc = "Bufferline pick to Close" },
       {"<leader>bp", "<cmd>BufferLineTogglePin<CR>", desc = "Bufferline Toggle Pin Buffer" },
-      { "<leader>bb", "<cmd>BufferLineCloseLeft<CR>", desc = "Bufferline close buffer right" },
-      { "<leader>bn", "<cmd>BufferLineCloseRight<CR>", desc = "Bufferline close buffer right" },
-      { "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", desc = "Bufferline close other buffers" },
-      { "<leader>bd", "<cmd>bdelete<CR>", desc = "Bufferline delete current buffer" },
-    
+      { "<leader>bb", "<cmd>wa | BufferLineCloseLeft<CR>", desc = "Bufferline close buffer right" },
+      { "<leader>bn", "<cmd>wa | BufferLineCloseRight<CR>", desc = "Bufferline close buffer right" },
+      { "<leader>bo", "<cmd>wa | BufferLineCloseOthers<CR>", desc = "Bufferline close other buffers" },
+      { "<leader>bd", "<cmd>w | bdelete<CR>", desc = "Bufferline delete current buffer" },
+      --
       -- buffer line index shortcut
       {"<leader>1", "<cmd>lua require('bufferline').go_to(1, true)<cr>", desc = "Bufferline go to buffer 1" },
       {"<leader>2", "<cmd>lua require('bufferline').go_to(2, true)<cr>", desc = "Bufferline go to buffer 2" },
