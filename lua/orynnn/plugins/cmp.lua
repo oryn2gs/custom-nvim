@@ -1,5 +1,4 @@
 return {
-
   -- CMP
   -- blink cmp, check official site for more information on configuratino and customization: https://cmp.saghen.dev/installation
   -- TODO: add integretions with LSP
@@ -9,11 +8,15 @@ return {
     dependencies = {
       "L3MON4D3/LuaSnip",        -- snippet engine
       "rafamadriz/friendly-snippets",
+      "windwp/nvim-autopairs",
     },
     opts = {
       keymap = { preset = "default" },
       completion = {
         documentation = { auto_show = false },
+        accept = {
+          auto_brackets = { enabled = true }, 
+        },
       },
       sources = {
         default = { "lsp", "path", "snippets", "buffer", "tailwind_colors" }, 
@@ -28,7 +31,8 @@ return {
     dependencies = {"saghen/blink.cmp"},
     -- optionally, override the default options:
     config = function()
-      require("tailwindcss-colorizer-cmp").setup {
+      local tailwind_colorizer = require "tailwindcss-colorizer-cmp"
+      tailwind_colorizer.setup {
         color_square_width = 2,
       }
     end,
