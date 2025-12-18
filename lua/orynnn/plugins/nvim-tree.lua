@@ -1,8 +1,5 @@
 -- nvim tree: https://github.com/nvim-tree/nvim-tree.lua
 
-
--- FIX: folder icons
--- create a file should open new file and focus
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = { 

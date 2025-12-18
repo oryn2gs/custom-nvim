@@ -60,17 +60,17 @@ return {
           lsp_doc_border = false, -- add a border to hover docs and signature help
         },
 
-        -- show recording with noice
-        -- INFO: uncomment to show recording with noice -- using NvChad UI statusline to show recording
-        routes = {
-          {
-            view = "notify",
-            filter = { event = "msg_showmode" },
-          },
-        },
+        -- -- specify how to route message 
+        -- -- you filter out message and add message or mode, useful for showing mode like recording
+        -- routes = {
+        --   {
+        --     view = "notify",
+        --     filter = {
+        --       event = "msg_showmode"
+        --     },
+        --   },
+        -- },
           
-        },
-    -- FIX: need to fix the auto entering lsp "hover" view -
-    -- link -> https://github.com/folke/noice.nvim/blob/0427460c2d7f673ad60eb02b35f5e9926cf67c59/lua/noice/config/views.lua
+      },
 }
 

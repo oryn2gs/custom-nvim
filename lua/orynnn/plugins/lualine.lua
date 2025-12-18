@@ -17,7 +17,14 @@ return {
         lualine_a = {"mode"},
         lualine_b = { "branch", "diff", "diagnostics"},
         lualine_x = {},
-        lualine_y = {"lsp_status"},
+        lualine_y = {
+          {
+            require("noice").api.status.mode.get,
+            cond = require("noice").api.status.mode.has,
+            color = { fg = "#ff9e64" },
+          },
+          "lsp_status"
+        },
         lualine_z = { "location" },
       },
       inactive_sections = {
