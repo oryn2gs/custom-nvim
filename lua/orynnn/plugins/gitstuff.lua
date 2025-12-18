@@ -15,11 +15,15 @@ return {
   {
     "github/copilot.vim",   -- github free tier supports 2000 code completions per month and 50 agent mode : https://docs.github.com/en/copilot/how-tos/set-up/set-up-for-self.
     event = "InsertEnter",
+    keys = {
+      { "<leader>ge", "<cmd>Copilot enable<CR>", desc = "Github copilot enable" },
+      { "<leader>gE", "<cmd>Copilot disable<CR>", desc = "Git copilot disable" },
+      { "<leader>gD", "<cmd>Copilot panel<CR>", desc = "Git copilot dashboard" },
+    },
     config = function()
       -- if you want to change default <Tab> mapping
       -- vim.g.copilot_no_tab_map = true
-      -- vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-      --
+      vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { desc="Github copilot accept suggestion", silent = true, expr = true })
     end,
   },
   -- git signs : https://github.com/lewis6991/gitsigns.nvim

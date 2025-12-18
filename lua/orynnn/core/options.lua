@@ -47,6 +47,10 @@ vim.o.splitbelow = true         -- horizontal splits open below
 vim.o.lazyredraw = true         -- faster macros and regex
 vim.o.updatetime = 300          -- faster CursorHold events
 
+-- Copilot
+vim.g.copilot_enabled = false -- Disable Copilot by default
+vim.g.copilot_no_tab_map = true  -- optional: prevent tab conflicts with lsp
+
 -- Folding
 -- vim.o.foldmethod = "manual"           -- use manual folding (you control folds)
 -- vim.o.foldopen = "all"                 -- when opening a fold, open all contained folds
