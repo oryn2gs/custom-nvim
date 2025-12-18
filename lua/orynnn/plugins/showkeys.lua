@@ -1,28 +1,24 @@
 -- showkeys.nvim: https://github.com/nvzone/showkeys/blob/main/README.md
--- FIX: keys are not showing
 -- 
+
 return {
   "nvzone/showkeys",
   lazy = true, -- auto run on startup
   cmd = "ShowkeysToggle",
+  keys = {
+    {"<leader>sk", "<cmd>ShowkeysToggle<CR>", desc = "Show keys toggle."}
+  },
   opts = {
-      position = "bottom-center",
+      position = "bottom-right",
       maxkeys = 3,
       show_count = true,
-      winopts = {
+      winopts = { -- :h nvim_open_win
           focusable = false,
           relative = "editor",
           style = "minimal",
           border = "single",
           height = 1,
-          row = 1,
-          col = 0,
       },
+      excluded_modes = {"i"},
   },
-  config = function(_, opts)
-      require("showkeys").setup(opts)
-      vim.defer_fn(function()
-          vim.cmd("ShowkeysToggle")
-      end, 100)
-  end,
 }

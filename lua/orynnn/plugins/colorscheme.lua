@@ -26,7 +26,7 @@ return {
         },
       }
       vim.cmd("colorscheme onedark")
--- === Highlight overrides to #CEB422 ===
+      -- === Highlight overrides to #CEB422 ===
       local highlights = {
         ["@attribute"] = { fg = "#CEB422", bold = true },
         ["@function"] = { fg = "#fff" },
