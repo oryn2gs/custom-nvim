@@ -1,7 +1,7 @@
 -- plugins/init.lua
 -- loads plugins that requires minimal setup
 --
--- TODO:    wilder, mini module
+-- TODO:    wilder
 return {
   -- todo comments
   -- check: https://github.com/folke/todo-comments.nvim
@@ -44,15 +44,20 @@ return {
     end,
   },
 
-
   -- undotree
-  --  FIX: the undotree render
   {
     "mbbill/undotree",
+    keys = {
+      { "<leader>ut","<cmd>UndotreeToggle<CR>", desc = "Undo tree toggle"}
+    },
     config = function()
-
-
-      vim.keymap.set("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "Toggle UndoTree" })
+      -- plugin options: https://github.com/mbbill/undotree/blob/master/plugin/undotree.vim#L27
+      vim.g.undotree_WindowLayout = 4   -- window layout 1 | 2 | 3 | 4
+      vim.g.undotree_SetFocusWhenToggle = 1   
+      vim.g.undotree_TreeNodeShape = "•"  
+      vim.g.undotree_DiffAutoOpen = 1  -- opens diff window automatically
+      vim.g.undotree_SplitWidth=50
+      vim.g.undotree_DiffpanelHeight = 20
     end,
   },
 

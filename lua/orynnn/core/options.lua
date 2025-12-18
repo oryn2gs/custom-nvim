@@ -52,15 +52,6 @@ vim.g.copilot_enabled = false -- Disable Copilot by default
 vim.g.copilot_no_tab_map = true  -- optional: prevent tab conflicts with lsp
 
 
--- undotree
--- FIX: the verticle split
-vim.g.undotree_WindowLayout = 2             -- vertical split
-vim.g.undotree_SplitWidth = math.floor(vim.o.columns * 0.5)  -- 50% width
-vim.g.undotree_SetFocusWhenToggle = 1       -- focus automatically
-vim.g.undotree_TreeNodeShape = "•"
-vim.g.undotree_DiffAutoOpen = 1             -- open diff automatically
-
-
 -- Folding
 -- vim.o.foldmethod = "manual"           -- use manual folding (you control folds)
 -- vim.o.foldopen = "all"                 -- when opening a fold, open all contained folds
