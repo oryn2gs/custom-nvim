@@ -6,6 +6,7 @@ vim.g.mapleader = " "
 
 local map = vim.keymap.set
 
+
 -- opts
 local function opts(desc)
   return { desc = desc, noremap = true, silent = true }
@@ -19,10 +20,11 @@ map("n", "<C-a>", "gg<S-v>G", opts "Select all in the buffer" )
 map("n", "<C-s>", "<cmd>w<CR>", opts "Save current buffer" )
 map("n", "<C-c>", "<cmd>%y+<CR>", opts "Copy whole file")
 map("i", "jj", "<ESC>",  opts "Exit insert mode" )
+map("n", "<Esc>", "<cmd>noh<CR>", opts "general clear search highlights")
 
 -- Move insert cursor to beginning/end of line without leaving insert mode 
-map("n", "<leader>tt", "<ESC>^i", opts "Insert mode: move to beginning of line")
-map("n", "<leader>uu", "<ESC>$a", opts "Insert mode: move to end of line")
+map("n", "<leader>hh", "<ESC>^i", opts "Insert mode: move to beginning of line")
+map("n", "<leader>ll", "<ESC>$a", opts "Insert mode: move to end of line")
 
 
 --- Toggle line numbers
@@ -35,17 +37,10 @@ map("n", "<C-u>", "<C-u>zz", opts "move up in buffer with cursor centered" )
 map("n", "n", "nzzzv", opts "move to next search result with cursor centered" )
 map("n", "N", "Nzzzv", opts "move to previous search result with cursor centered" )
 
-
--- ctrl c as escape cuz Im lazy to reach up to the esc key
--- FIX: use other keys
--- map("i", "<C-c>", "<Esc>", opts  "Exit insert mode" )
-map("n", "<Esc>", "<cmd>noh<CR>", opts "general clear highlights")
-
 -- Executes shell command from in here making file executable
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", opts "makes file executable" )
 
-
--- NVIM window management
+-- window(buffer) management
 map("n", "<leader>ws", ":split<Return>",  opts  "Window split horizontally" )
 map("n", "<leader>wv", ":vsplit<Return>",  opts  "Window split vertically" )
 map("n", "<leader>we", "<C-w>",  opts  "Window resize equally" )
@@ -71,4 +66,8 @@ map("n", "<leader>tp", function()
   require("todo-comments").jump_prev()
 end, { desc = "Todo comments jump prev" })
 
+
+-- In terminal mode, press Esc to enter normal mode
+-- PERF: Optinal?? ESC should escape terminal mode while in terminal
+-- map("t", '<Esc>', [[<C-\><C-n>]], opts "Terminal exit in term mode")
 

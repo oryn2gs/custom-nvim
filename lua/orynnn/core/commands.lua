@@ -20,6 +20,7 @@ function M.setup()
     local base_path = vim.loop.cwd()
     buffer.add_buffer(vim.loop.cwd())
   end, { desc = "Create new buffer at project root" })
+
 end
 
 return M
