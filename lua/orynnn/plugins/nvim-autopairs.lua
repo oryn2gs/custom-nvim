@@ -12,6 +12,7 @@ return {
     check_ts = true,
     ts_config = {
       lua = { "string" },
+    -- checks if the next pair is close bracket and does nothave bracket pair, it won't ad dpair bracket 
       -- java = false, --don't check java ts 
     },
     -- checks if the next pair is close bracket and does nothave bracket pair, it won't ad dpair bracket 

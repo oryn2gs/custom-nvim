@@ -1,102 +1,136 @@
 -- nvim treesitter
--- FIX: https://github.com/nvim-treesitter/nvim-treesitter/issues/914
--- --- tries to configure nvim-treesitter before the package is fully loaded.
-return {
-  "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",  -- ensures parsers are installed/updated
-  event = { "BufReadPost", "BufNewFile" },
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
+-- for debugging: check the treesitter highliter `lua print(vim.inspect(vim.treesitter.highlighter.active[0]))`
+return { 
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      local ts = require "nvim-treesitter"
+      -- ts.setup () -- to setup tree sitter
+      local langs = {
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "tsx",
+        "jsx",
+        "json",
+        "json5",
+        "jsdoc",
+        "svelte",
+        "vue",
+        "angular",
+        "python",
+        "scss",
+        "htmldjango",
+        "jinja",
+        "go",
+        "rust",
+        "lua",
+        "luadoc",
+        "c",
+        "c_sharp",
+        "java",
+        "javadoc",
+        "php",
+        "phpdoc",
+        "swift",
+        "solidity",
+        "graphql",
+        "prisma",
+        "sql",
+        "editorconfig",
+        "vim",
+        "vimdoc",
+        "tmux",
+        "git_config",
+        "git_rebase",
+        "gitattributes",
+        "gitcommit",
+        "gitignore",
+        "dockerfile",
+        "helm",
+        "caddy",
+        "nginx",
+        "terraform",
+        "markdown",
+        "markdown_inline",
+        "yaml",
+        "csv",
+        "toml",
+        "xml",
+        "arduino",
+        "promql",
+        "regex",
+        "bash",
+        "zsh",
+        "fish",
+        "awk",
+      }
+      ts.install(langs)
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = langs,
+        callback = function()
+          -- syntax highlighting, provided by Neovim
+          vim.treesitter.start()
+          -- folds, provided by Neovim
+          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.wo.foldmethod = 'expr'
+          vim.wo.foldlevel = 99         -- arbitrary high number
+          -- indentation, provided by nvim-treesitter
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+
+
+    end,
+
   },
-  config = function()
-    require("nvim-treesitter.configs").setup {
-      ensure_installed = {
-          "html",
-          "css",
+  {
+    -- PERF: test textobject mapping
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch= "main",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    init = function()
+      -- Disable entire built-in ftplugin mappings to avoid conflicts.
+      -- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+      vim.g.no_plugin_maps = true
 
-          "javascript",
-          "typescript",
-          "tsx",
-
-          "prisma",
-
-          "python",
-          "scss",
-          "htmldjango",
-
-          "rust",
-
-          "lua",
-          "luadoc",
-
-          "vim",
-          "vimdoc",
-
-          "git_config",
-          "git_rebase",
-          "gitattributes",
-          "gitcommit",
-
-          "dockerfile",
-
-          "markdown",
-          "markdown_inline",
-          "yaml",
-          "csv",
-
-          "caddy",
-          "nginx",
-          "terraform",
-
-          "arduino",
-          "bash",
-          "promql",
-          "sql",
-          "xml",
-          "regex",
-        },
-        -- Install parsers synchronously (only applied to `ensure_installed`)
-        sync_install = false,
-
-        -- Automatically install missing parsers when entering buffer
-        -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-        auto_install = true,
-
-        -- List of parsers to ignore installing (or "all")
-        -- ignore_install = { "javascript" },
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        { import = "plugins" },
-
-        indent = {
-        enable = true,               -- smarter indentation
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "gnn",
-          node_incremental = "grn",
-          node_decremental = "grm",
-          scope_incremental = "grc",
-        },
-      },
-
-      -- TODO: learn more about text objects
-      textobjects = {
+      -- Or, disable per filetype (add as you like)
+      -- vim.g.no_python_maps = true
+      -- vim.g.no_ruby_maps = true
+    end,
+    config = function()
+      local ntextobjects = require "nvim-treesitter-textobjects"
+      ntextobjects.setup {
         select = {
           enable = true,
-          lookahead = true,  -- automatically jump forward to textobject
+          lookahead = true,  -- jumps forward to the next object
           keymaps = {
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
             ["ac"] = "@class.outer",
             ["ic"] = "@class.inner",
+            ["as"] = "@local.scope",
           },
+          selection_modes = {
+            ['@parameter.outer'] = 'v',
+            ['@function.outer'] = 'V',
+            ['@class.outer'] = '<c-v>',
+          },
+
         },
-      },
-    }
-  end,
+        include_surrounding_whitespace = false
+      }
+      -- keymaps
+      -- You can use the capture groups defined in `textobjects.scm`
+      -- vim.keymap.set({ "x", "o" }, "af", function()
+      --   require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+      -- end)
+    end
+  }
 }
 
