@@ -1,4 +1,3 @@
-
 -- Telescope
 return {
   {
@@ -15,7 +14,7 @@ return {
     },
     cmd = "Telescope",
     keys = function()
-      local builtin = require("telescope.builtin")
+      local builtin = require "telescope.builtin"
       return {
         { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Telescope Find files" },
         { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Telescope Live grep" },
@@ -23,7 +22,13 @@ return {
         { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Telescope Help tags" },
         { "<leader>ft", "<cmd>TodoTelescope<CR>", desc = "Telescope find todos" },
         { "<leader>fp", "<cmd>Telescope media_files<CR>", desc = "Telescope find media files" },
-        { "<leader>fa", function() require('telescope.builtin').find_files({hidden=true}) end, desc = "Telescope find hidden files" },
+        {
+          "<leader>fa",
+          function()
+            require("telescope.builtin").find_files { hidden = true }
+          end,
+          desc = "Telescope find hidden files",
+        },
         { "<leader>fr", builtin.old_files, desc = "Telescope find media files" },
         { "<leader>fR", builtin.resume, desc = "Telescope resume previous state" },
         { "<leader>fT", builtin.commands, desc = "Telescope list available plugins/user commands" },
@@ -35,24 +40,61 @@ return {
         { "<leader>fH", builtin.highlights, desc = "Telescope list highlights" },
         { "<leader>fj", builtin.jumplist, desc = "Telescope list jumplist" },
         { "<leader>fA", builtin.autocommands, desc = "Telescope list vim autocmds" },
-        
+
         -- Git related mappings
         { "<leader>gc", builtin.git_commits, desc = "Git commits - Telescope" },
         { "<leader>gC", builtin.git_bcommits, desc = "Git current buffer commit history - Telescope" },
         { "<leader>gb", builtin.git_brances, desc = "Git branch list - Telescope" },
         { "<leader>gs", builtin.git_status, desc = "Git status - Telescope" },
         { "<leader>gS", builtin.git_stash, desc = "Git stash list - Telescope" },
-        
+
+        -- diagnostic for linter and lsp servers
+        {
+          "<leader>lm",
+          function()
+            builtin.diagnostics { severity = "INFO" }
+          end,
+          desc = "Diagnostics INFO",
+        },
+        {
+          "<leader>lM",
+          function()
+            builtin.diagnostics()
+          end,
+          desc = "Diagnostics WARN",
+        },
+
         -- TODO: configure lsp key mappings
+        {
+          "<leader>lr",
+          function()
+            builtin.lsp_refrences()
+          end,
+          desc = "Lsp list all refrences",
+        },
+        {
+          "<leader>lc",
+          function()
+            builtin.lsp_incoming_calls()
+          end,
+          desc = "Lsp incomming calls",
+        },
+        {
+          "<leader>lC",
+          function()
+            builtin.lsp_outgoing_calls()
+          end,
+          desc = "Lsp outgoing calls",
+        },
       }
     end,
     config = function()
-      local telescope = require("telescope")
-      local actions = require("telescope.actions")
+      local telescope = require "telescope"
+      local actions = require "telescope.actions"
 
-      telescope.setup({
+      telescope.setup {
         defaults = {
-          prompt_prefix = "🔍 ",
+          prompt_prefix = "🔍  ",
           selection_caret = " ",
           entry_prefix = " ",
           path_display = { "smart" },
@@ -91,12 +133,11 @@ return {
             find_cmd = "rg",
           },
         },
-      })
+      }
 
       -- Load extensions after setup
-      telescope.load_extension("fzf")
-      telescope.load_extension("media_files")
+      telescope.load_extension "fzf"
+      telescope.load_extension "media_files"
     end,
   },
 }
-

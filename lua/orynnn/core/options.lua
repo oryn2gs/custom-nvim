@@ -1,56 +1,58 @@
 -- Core Neovim options
 -- Reference: https://neovim.io/doc/user/options.html
 --
-vim.g.mapleader=" "
+vim.g.mapleader = " "
 
 -- Appearance
-vim.o.number = true             -- show line numbers
-vim.o.relativenumber = true     -- show relative line numbers
-vim.o.cursorline = true         -- highlight current line
-vim.o.cursorlineopt = "both"          -- enable cursorline for both screen line and line number
-vim.o.termguicolors = true      -- enable 24-bit colors
-vim.o.signcolumn = "yes"        -- always show sign column (for git/gitsigns)
+vim.o.number = true -- show line numbers
+vim.o.relativenumber = true -- show relative line numbers
+vim.o.cursorline = true -- highlight current line
+vim.o.cursorlineopt = "both" -- enable cursorline for both screen line and line number
+vim.o.termguicolors = true -- enable 24-bit colors
+vim.o.signcolumn = "yes" -- always show sign column (for git/gitsigns)
 
 -- Editing
-vim.o.expandtab = true          -- use spaces instead of tabs
-vim.o.shiftwidth = 2            -- number of spaces for each indentation
-vim.o.tabstop = 2               -- number of spaces a tab counts for
-vim.o.smartindent = true        -- auto-indent new lines
-vim.o.autoindent = true         -- copy indent from current line
-vim.o.breakindent = true               -- visually indent wrapped lines to match the start of the line
-vim.o.backspace = "indent,eol,start"  -- allow backspace over autoindent, line breaks, and start of insert
-vim.o.wrap = true              -- disable line wrapping
-vim.o.showbreak = "↪ "         -- string to show at the start of wrapped lines
+vim.o.expandtab = true -- use spaces instead of tabs
+vim.o.shiftwidth = 2 -- number of spaces for each indentation
+vim.o.tabstop = 2 -- number of spaces a tab counts for
+vim.o.smartindent = true -- auto-indent new lines
+vim.o.autoindent = true -- copy indent from current line
+vim.o.breakindent = true -- visually indent wrapped lines to match the start of the line
+vim.o.backspace = "indent,eol,start" -- allow backspace over autoindent, line breaks, and start of insert
+vim.o.wrap = true -- disable line wrapping
+vim.o.showbreak = "↪ " -- string to show at the start of wrapped lines
 
 -- Searching
-vim.o.ignorecase = true         -- case-insensitive search
-vim.o.smartcase = true          -- but sensitive if uppercase used
-vim.o.hlsearch = true           -- highlight search results
-vim.o.incsearch = true          -- incremental search
+vim.o.ignorecase = true -- case-insensitive search
+vim.o.smartcase = true -- but sensitive if uppercase used
+vim.o.hlsearch = true -- highlight search results
+vim.o.incsearch = true -- incremental search
 
 -- Files
-vim.o.swapfile = false         
-vim.o.backup = false            -- disable backup
-vim.o.undofile = true           -- enable persistent undo
-vim.o.undodir = vim.fn.stdpath("data") .. "/undo" -- undo file location
+vim.o.swapfile = false
+vim.o.backup = false -- disable backup
+vim.o.undofile = true -- enable persistent undo
+vim.o.undodir = vim.fn.stdpath "data" .. "/undo" -- undo file location
 
 -- Clipboard
 vim.o.clipboard = "unnamedplus" -- use system clipboard
 
 -- Splits
-vim.o.splitright = true         -- vertical splits open to the right
-vim.o.splitbelow = true         -- horizontal splits open below
+vim.o.splitright = true -- vertical splits open to the right
+vim.o.splitbelow = true -- horizontal splits open below
 
 -- Other useful settings
 -- vim.o.scrolloff = 8             -- keep 8 lines visible above/below cursor
 -- vim.o.sidescrolloff = 8
-vim.o.lazyredraw = true         -- faster macros and regex
-vim.o.updatetime = 300          -- faster CursorHold events
+vim.o.lazyredraw = true -- faster macros and regex
+vim.o.updatetime = 300 -- faster CursorHold events
 
 -- Copilot
 vim.g.copilot_enabled = false -- Disable Copilot by default
-vim.g.copilot_no_tab_map = true  -- optional: prevent tab conflicts with lsp
+vim.g.copilot_no_tab_map = true -- optional: prevent tab conflicts with lsp
 
+-- auto session
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Folding
 -- vim.o.foldmethod = "manual"           -- use manual folding (you control folds)

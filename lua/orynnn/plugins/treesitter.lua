@@ -68,6 +68,7 @@ return {
         "zsh",
         "fish",
         "awk",
+        "latex", "norg", "typst"
       }
       ts.install(langs)
 

@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- import plugins modules
   { import = "orynnn.plugins" },
-  { import = "orynnn.plugins.lsp" },
+  { import = "orynnn.plugins.mason" },
 }, {
   defaults = { lazy = true }, -- lazy-load by default
   checker = { enabled = true , notify= true, frequency = 60 * 60 * 24 * 7}, -- auto-check for plugin updates

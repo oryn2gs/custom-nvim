@@ -3,8 +3,7 @@ if vim.g.vscode then
   vim.cmd [[source $HOME/.config/nvim/vscode/settings.vim]]
   -- easy motion  install
 else
-  -- Entry point for Neovim
-  -- Loads core settings first, then plugins
+  require("orynnn.env").setup()
 
   -- Core settings
   require "orynnn.core.options" -- vim.o options
