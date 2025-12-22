@@ -53,13 +53,3 @@ map("n", "<leader>wh", "<C-w>h", opts "Window navigate left")
 map("n", "<leader>wj", "<C-w>j", opts "Window navigate bottom")
 map("n", "<leader>wk", "<C-w>k", opts "Window navigate top")
 map("n", "<leader>wl", "<C-w>l", opts "Window navigate right")
-
--- inlay hints
---FIX: inlay hints
-map("n", "<leader>i", function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { 0 }, { 0 })
-end, opts "Enable inlay hint.")
-
--- In terminal mode, press Esc to enter normal mode
--- PERF: Optinal?? ESC should escape terminal mode while in terminal
--- map("t", '<Esc>', [[<C-\><C-n>]], opts "Terminal exit in term mode")

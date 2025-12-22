@@ -2,10 +2,10 @@
 
 return {
   "nvim-tree/nvim-tree.lua",
-  dependencies = { 
+  dependencies = {
     "nvim-tree/nvim-web-devicons",
     config = function()
-      require("nvim-web-devicons").setup({ default = true }) -- initialize icons
+      require("nvim-web-devicons").setup { default = true } -- initialize icons
     end,
   },
   cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeCollapse" }, -- lazy-load on these commands
@@ -14,7 +14,8 @@ return {
     { "<leader>e", "<cmd>NvimTreeFocus<CR>", desc = "Nvim Tree" },
   },
   config = function()
-    require("nvim-tree").setup({ disable_netrw = true,       -- disable default netrw hijack_netrw = true,        -- takeover netrw
+    require("nvim-tree").setup {
+      disable_netrw = true, -- disable default netrw hijack_netrw = true,        -- takeover netrw
       respect_buf_cwd = true,
       diagnostics = {
         enable = true,
@@ -36,7 +37,7 @@ return {
         },
       },
       update_focused_file = {
-        enable = true,      -- keep the current file focused
+        enable = true, -- keep the current file focused
       },
       live_filter = {
         prefix = "[FILTER]: ",
@@ -64,8 +65,12 @@ return {
         api.config.mappings.default_on_attach(bufnr)
 
         -- custom mappings
-        map("n", "<C-w>", function() api.tree.collapse_all({keep_buffers=false})end, opts "Nvim Tree Collapse" )
-        map("n", "<C-c>", function() api.tree.collapse_all({keep_buffers=true})end, opts "Nvim Tree Collapse not the directory with open buffers." )
+        map("n", "<C-w>", function()
+          api.tree.collapse_all { keep_buffers = false }
+        end, opts "Nvim Tree Collapse")
+        map("n", "<C-c>", function()
+          api.tree.collapse_all { keep_buffers = true }
+        end, opts "Nvim Tree Collapse not the directory with open buffers.")
         map("n", "D", api.fs.remove, opts "Delete")
         map("n", "d", api.fs.trash, opts "Trash")
         map("n", "<C-s>", function() -- open file/folder under the cursor in system default application
@@ -75,6 +80,6 @@ return {
           end
         end, opts "Open file/folder with system application")
       end, -- close on_attach
-    }) -- close setup
+    } -- close setup
   end,
 }
