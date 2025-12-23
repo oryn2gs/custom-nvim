@@ -1,4 +1,4 @@
--- mason-org/mason 
+-- mason-org/mason
 -- mason a package manager for formatter, linters and lsp servers
 --
 
@@ -6,7 +6,7 @@ return {
   -- mason package manager
   {
     "mason-org/mason.nvim",
-    opts = {}
+    opts = {},
   },
   -- bridge between mason and nvim-lspconfig, auto install required packages
   {
@@ -18,16 +18,15 @@ return {
         "cssls",
         "ts_ls",
         "eslint",
-        "emmet_launguage_server",
+        "emmet_language_server",
         "pyright",
-        "rust_analyzer"
+        "rust_analyzer",
       },
       automatic_installation = true,
-
     },
     dependencies = {
-        { "mason-org/mason.nvim", opts = {} },
-        "neovim/nvim-lspconfig",
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
     },
   },
   -- mason null ls for auto packages installation
@@ -59,7 +58,6 @@ return {
           "stylelint",
           "clippy",
 
-
           -- linters --
           "pylint",
           "eslint",
@@ -76,5 +74,5 @@ return {
         automatic_installation = true, -- Auto install on startup if missing
       }
     end,
-  }
+  },
 }

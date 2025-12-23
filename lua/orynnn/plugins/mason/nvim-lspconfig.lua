@@ -1,31 +1,87 @@
--- nvim-lspconfig (Neovim 0.11+ style)
+-- nvim-lspconfig (Neovim 0.11+)
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
-
   dependencies = {
     "mason-org/mason.nvim",
     "mason-org/mason-lspconfig.nvim",
+  },
+  opts = {
+    servers = {
+      lua_ls = {
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim" } },
+            hint = {
+              enable = true,
+              paramType = true,
+              paramName = "All",
+              setType = true,
+              returnType = true,
+            },
+            workspace = {
+              checkThirdParty = false,
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = { enable = false },
+          },
+        },
+      },
 
-    {
-      "folke/lazydev.nvim",
-      ft = "lua",
-      opts = {
-        library = {
-          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      pyright = {
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = "strict",
+              autoSearchPaths = true,
+            },
+            inlayHints = {
+              enabled = true,
+              parameterHints = true,
+              typeHints = true,
+              functionReturnTypes = true,
+              callArgumentNames = true,
+            },
+          },
+        },
+      },
+
+      rust_analyzer = {},
+      tsserver = {},
+      html = {},
+      cssls = {},
+      eslint = {},
+      emmet_ls = {},
+
+      tailwindcss = {
+        settings = {
+          tailwindCSS = {
+            classFunctions = { "cva", "cx" },
+          },
         },
       },
     },
   },
 
-  config = function()
-    --------------------------------------------------------------------------
-    -- 1. GLOBAL DIAGNOSTICS (this was missing / misplaced before)
-    --------------------------------------------------------------------------
+  config = function(_, opts)
+    ------------------------------------------------------------------------
+    -- GLOBAL DIAGNOSTICS
+    ------------------------------------------------------------------------
     vim.diagnostic.config {
       virtual_text = {
-        spacing = 2,
+        spacing = 4,
         prefix = "●",
+        -- if you only want to show virtual text for INFO and ERROR
+        -- format = function(diagnostic)
+        --   if
+        --     diagnostic.severity == vim.diagnostic.severity.INFO
+        --     or diagnostic.severity == vim.diagnostic.severity.ERROR
+        --   then
+        --     return diagnostic.message
+        --   end
+        --   return nil -- hide other severities (like WARN, HINT)
+        -- end,
       },
       signs = true,
       underline = true,
@@ -33,149 +89,68 @@ return {
       severity_sort = true,
     }
 
-    --------------------------------------------------------------------------
-    -- 2. LspAttach: ONE place for buffer-local LSP behavior
-    --------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    -- CAPABILITIES (Blink / snippets friendly)
+    ------------------------------------------------------------------------
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+    capabilities.textDocument.completion.completionItem = {
+      documentationFormat = { "markdown", "plaintext" },
+      snippetSupport = true,
+      preselectSupport = true,
+      insertReplaceSupport = true,
+      labelDetailsSupport = true,
+      deprecatedSupport = true,
+      commitCharactersSupport = true,
+      resolveSupport = {
+        properties = { "documentation", "detail", "additionalTextEdits" },
+      },
+    }
+
+    ------------------------------------------------------------------------
+    -- LspAttach: buffer-local behavior ONLY
+    ------------------------------------------------------------------------
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("user.lsp", { clear = true }),
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         local bufnr = args.buf
-
-        -- Enable inlay hints automatically (if supported)
-        if client and client:supports_method "textDocument/inlayHint" then
-          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        if not client then
+          return
         end
 
-        -- Keymaps (buffer-local, correct scope)
+        -- enable inlay_hint at start up
+        -- if client:supports_method "textDocument/inlayHint" then
+        --   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        -- end
+
         local map = vim.keymap.set
-        local function opts(desc)
+        local o = function(desc)
           return { desc = desc, noremap = true, silent = true }
         end
 
-        map("n", "grd", vim.lsp.buf.definition, opts "Lsp go to defination")
-        map("n", "gre", vim.lsp.buf.declaration, opts "Lsp got to declaration")
-        map("n", "grp", vim.lsp.buf.hover, opts "Lsp toggle hover")
+        map("n", "grd", vim.lsp.buf.definition, o "vim.lsp.buf.definition()")
+        map("n", "gre", vim.lsp.buf.declaration, o "vim.lsp.buf.declaration()")
+        map("n", "grp", vim.lsp.buf.hover, o "vim.lsp.buf.hover()")
+        map("n", "grs", vim.lsp.buf.signature_help, o "vim.lsp.buf.signature_help()")
         map("n", "grh", function()
-          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        end, opts "Enable inlay hint.")
-        -- opts to toggle virtual
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }, { bufnr = bufnr })
+        end, o "toggle inlay hint")
       end,
     })
 
-    --------------------------------------------------------------------------
-    -- 3. CAPABILITIES (Blink / snippets friendly)
-    --------------------------------------------------------------------------
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities = {
-      -- text document
-      textDocument = {
-        completion = {
-          dynamicRegistration = true,
-          completionItem = {
-            documentationFormat = { "markdown", "plaintext" },
-            snippetSupport = true, -- needed of snippet support for cmp
-            preselectSupport = true, -- preselect item in complition popup
-            insertReplaceSupport = true, -- supports insert replace
-            labelDetailsSupport = true,
-            deprecatedSupport = true, -- marks depreciated items
-            commitCharactersSupport = true, -- accepts commit chars
-            --   tagSupport = { valueSet = { 1 } },
-            resolveSupport = {
-              properties = { "documentation", "detail", "additionalTextEdits" },
-            },
-          },
-        },
-      },
-      --- can do other settings here...
-    }
+    ------------------------------------------------------------------------
+    -- REGISTER + ENABLE SERVERS
+    ------------------------------------------------------------------------
+    for name, server in pairs(opts.servers) do
+      vim.lsp.config(
+        name,
+        vim.tbl_deep_extend("force", {
+          capabilities = capabilities,
+        }, server)
+      )
+    end
 
-    --------------------------------------------------------------------------
-    -- 4. SERVER CONFIGS (declarative, no setup calls)
-    --------------------------------------------------------------------------
-    -- lua ls
-    vim.lsp.config.lua_ls = {
-      capabilities = capabilities,
-      settings = {
-        Lua = {
-          runtime = { version = "LuaJIT" },
-          diagnostics = {
-            globals = { "vim" },
-          },
-          hint = {
-            enable = true,
-            paramType = true,
-            paramName = "All",
-            setType = true,
-            returnType = true,
-          },
-          workspace = {
-            checkThirdParty = false,
-            library = vim.api.nvim_get_runtime_file("", true),
-          },
-          telemetry = { enable = false },
-        },
-      },
-    }
-
-    -- pyright
-    vim.lsp.config.pyright = {
-      capabilities = capabilities,
-      settings = {
-        python = {
-          analysis = {
-            typeCheckingMode = "strict",
-            autoSearchPaths = true,
-          },
-          inlayHints = {
-            enabled = true,
-            parameterHints = true,
-            typeHints = true,
-            functionReturnTypes = true,
-            callArgumentNames = true,
-          },
-        },
-      },
-    }
-
-    --- rust_analyzer
-    vim.lsp.config.rust_analyzer = {
-      capabilities = capabilities,
-    }
-
-    --- ts server
-    vim.lsp.config.tsserver = {
-      capabilities = capabilities,
-    }
-
-    vim.lsp.config.html = { capabilities = capabilities }
-    vim.lsp.config.cssls = { capabilities = capabilities }
-    vim.lsp.config.eslint = { capabilities = capabilities }
-    vim.lsp.config.emmet_ls = { capabilities = capabilities }
-
-    vim.lsp.config.tailwindcss = {
-      capabilities = capabilities,
-      settings = {
-        tailwindCSS = {
-          classFunctions = { "cva", "cx" },
-        },
-      },
-    }
-
-    --------------------------------------------------------------------------
-    -- 5. ENABLE SERVERS (THIS IS REQUIRED)
-    --------------------------------------------------------------------------
-    vim.lsp.enable {
-      "lua_ls",
-      "pyright",
-      "rust_analyzer",
-      "tsserver",
-      "html",
-      "cssls",
-      "tailwindcss",
-      "eslint",
-      "emmet_ls",
-    }
+    vim.lsp.enable(vim.tbl_keys(opts.servers))
   end,
 }

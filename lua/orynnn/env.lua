@@ -18,7 +18,7 @@ end
 -- Detect Python interpreter
 function M.get_python_interpreter()
   -- Project virtualenv
-  local venv = os.getenv("VIRTUAL_ENV")
+  local venv = os.getenv "VIRTUAL_ENV"
   if venv then
     return venv .. "/bin/python"
   end
@@ -30,7 +30,7 @@ function M.get_python_interpreter()
   end
 
   -- System python
-  local handle = io.popen("which python3")
+  local handle = io.popen "which python3"
   local python = handle:read("*a"):gsub("%s+", "")
   handle:close()
   if python ~= "" then
