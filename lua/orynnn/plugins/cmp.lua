@@ -57,10 +57,21 @@ return {
       -- SOURCES
       sources = {
         default = {
+          "lazydev",
           "lsp",
           "buffer",
           "path",
           "snippets",
+        },
+
+        -- lazydev providers
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
+          },
         },
       },
     },

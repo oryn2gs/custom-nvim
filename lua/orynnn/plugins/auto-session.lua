@@ -9,12 +9,11 @@ return {
   ---@module "auto-session"
   ---@type AutoSession.Config
   opts = {
-    suppressed_dirs = {"~/"}, -- if you want to supres directory
-    allowed_dirs = { "~/workspace"},
+    suppressed_dirs = { "~/" }, -- if you want to supres directory
+    allowed_dirs = { "~/workspace" },
     purge_after_minutes = 24 * 24 * 60 * 7, -- on week
     restore_error_handler = nil, -- restore error handler
     -- log_level = 'debug',
     ---
   },
-
 }

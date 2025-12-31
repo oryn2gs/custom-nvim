@@ -11,8 +11,13 @@ return {
       lua_ls = {
         settings = {
           Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "vim" } },
+            -- runtime = { version = "LuaJIT" },
+            -- diagnostics = { globals = { "vim" } },
+            -- workspace = {
+            --   checkThirdParty = false,
+            --   library = vim.api.nvim_get_runtime_file("", true),
+            -- },
+            -- telemetry = { enable = false },
             hint = {
               enable = true,
               paramType = true,
@@ -20,11 +25,6 @@ return {
               setType = true,
               returnType = true,
             },
-            workspace = {
-              checkThirdParty = false,
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-            telemetry = { enable = false },
           },
         },
       },
@@ -149,8 +149,9 @@ return {
           capabilities = capabilities,
         }, server)
       )
-    end
 
-    vim.lsp.enable(vim.tbl_keys(opts.servers))
+      -- enable servers
+      vim.lsp.enable(vim.tbl_keys(server))
+    end
   end,
 }

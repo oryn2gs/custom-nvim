@@ -1,4 +1,4 @@
--- utils/init.lua 
+-- utils/init.lua
 -- for utility functions
 
 local M = {}
@@ -14,7 +14,7 @@ local M = {}
 
 --]]
 M.trim = function(string)
-  return string:match("^%s*(.-)%s*$")
+  return string:match "^%s*(.-)%s*$"
 end
 
 return M
