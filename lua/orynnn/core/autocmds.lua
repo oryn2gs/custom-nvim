@@ -2,7 +2,6 @@
 -- here's the list of default events
 --
 
-
 --[[
   Module: autocmds.lua
   Purpose:
