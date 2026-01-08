@@ -54,3 +54,16 @@ vim.api.nvim_create_autocmd("FileType", {
     )
   end,
 })
+
+-- Highlight on yank
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank {
+      higroup = "IncSearch", -- The color group used for the highlight
+      timeout = 150, -- How long the highlight lasts (ms)
+    }
+  end,
+  group = highlight_group,
+  pattern = "*",
+})

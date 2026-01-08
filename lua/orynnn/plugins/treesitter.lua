@@ -1,6 +1,6 @@
 -- nvim treesitter
 -- for debugging: check the treesitter highliter `lua print(vim.inspect(vim.treesitter.highlighter.active[0]))`
-return { 
+return {
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
@@ -68,32 +68,31 @@ return {
         "zsh",
         "fish",
         "awk",
-        "latex", "norg", "typst"
+        "latex",
+        "norg",
+        "typst",
       }
       ts.install(langs)
 
-      vim.api.nvim_create_autocmd('FileType', {
+      vim.api.nvim_create_autocmd("FileType", {
         pattern = langs,
         callback = function()
           -- syntax highlighting, provided by Neovim
           vim.treesitter.start()
           -- folds, provided by Neovim
-          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-          vim.wo.foldmethod = 'expr'
-          vim.wo.foldlevel = 99         -- arbitrary high number
+          vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          vim.wo.foldmethod = "expr"
+          vim.wo.foldlevel = 99 -- arbitrary high number
           -- indentation, provided by nvim-treesitter
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })
-
-
     end,
-
   },
   {
     -- PERF: test textobject mapping
     "nvim-treesitter/nvim-treesitter-textobjects",
-    branch= "main",
+    branch = "main",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     init = function()
       -- Disable entire built-in ftplugin mappings to avoid conflicts.
@@ -109,7 +108,7 @@ return {
       ntextobjects.setup {
         select = {
           enable = true,
-          lookahead = true,  -- jumps forward to the next object
+          lookahead = true, -- jumps forward to the next object
           keymaps = {
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
@@ -118,20 +117,18 @@ return {
             ["as"] = "@local.scope",
           },
           selection_modes = {
-            ['@parameter.outer'] = 'v',
-            ['@function.outer'] = 'V',
-            ['@class.outer'] = '<c-v>',
+            ["@parameter.outer"] = "v",
+            ["@function.outer"] = "V",
+            ["@class.outer"] = "<c-v>",
           },
-
         },
-        include_surrounding_whitespace = false
+        include_surrounding_whitespace = false,
       }
       -- keymaps
       -- You can use the capture groups defined in `textobjects.scm`
       -- vim.keymap.set({ "x", "o" }, "af", function()
       --   require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
       -- end)
-    end
-  }
+    end,
+  },
 }
-

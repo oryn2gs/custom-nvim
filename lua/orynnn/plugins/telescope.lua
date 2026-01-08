@@ -25,11 +25,18 @@ return {
         {
           "<leader>fa",
           function()
-            require("telescope.builtin").find_files { hidden = true }
+            require("telescope.builtin").find_files { hidden = true, no_ignore = true }
           end,
           desc = "Telescope find hidden files",
         },
-        { "<leader>fr", builtin.old_files, desc = "Telescope find media files" },
+        {
+          "<leader>fd",
+          function()
+            require("telescope.builtin").diagnostics { severity = vim.diagnostic.severity.WARN }
+          end,
+          desc = "Telescope diagnostics",
+        },
+        { "<leader>fr", builtin.oldfiles, desc = "Telescope find old files" },
         { "<leader>fR", builtin.resume, desc = "Telescope resume previous state" },
         { "<leader>fT", builtin.commands, desc = "Telescope list available plugins/user commands" },
         { "<leader>fq", builtin.quickfix, desc = "Telescope list quickfix item" },
@@ -48,44 +55,10 @@ return {
         { "<leader>gs", builtin.git_status, desc = "Git status - Telescope" },
         { "<leader>gS", builtin.git_stash, desc = "Git stash list - Telescope" },
 
-        -- diagnostic for linter and lsp servers
-        {
-          "<leader>lm",
-          function()
-            builtin.diagnostics { severity = "INFO" }
-          end,
-          desc = "Diagnostics INFO",
-        },
-        {
-          "<leader>lM",
-          function()
-            builtin.diagnostics()
-          end,
-          desc = "Diagnostics WARN",
-        },
-
-        -- TODO: configure lsp key mappings
-        {
-          "<leader>lr",
-          function()
-            builtin.lsp_refrences()
-          end,
-          desc = "Lsp list all refrences",
-        },
-        {
-          "<leader>lc",
-          function()
-            builtin.lsp_incoming_calls()
-          end,
-          desc = "Lsp incomming calls",
-        },
-        {
-          "<leader>lC",
-          function()
-            builtin.lsp_outgoing_calls()
-          end,
-          desc = "Lsp outgoing calls",
-        },
+        -- Lsp keymaps
+        { "grr", builtin.lsp_references, desc = "vim.lsp.buf.refrences - Telescope" },
+        { "grc", builtin.lsp_incoming_calls, desc = "vim.lsp.buf.incoming_calls - Telescope" },
+        { "grC", builtin.lsp_outgoing_calls, desc = "vimn.lsp.buf.outgoing_calls - Telescope" },
       }
     end,
     config = function()
@@ -97,7 +70,7 @@ return {
           prompt_prefix = "🔍  ",
           selection_caret = " ",
           entry_prefix = " ",
-          path_display = { "smart" },
+          path_display = { "relative" },
           file_ignore_patterns = { "node_modules", ".git/" },
           sorting_strategy = "ascending",
           layout_config = {

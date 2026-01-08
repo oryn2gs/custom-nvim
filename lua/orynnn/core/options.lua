@@ -6,7 +6,7 @@ vim.g.mapleader = " "
 -- Appearance
 vim.o.number = true -- show line numbers
 vim.o.relativenumber = true -- show relative line numbers
-vim.o.cursorline = true -- highlight current line
+-- vim.o.cursorline = true -- highlight current line
 vim.o.cursorlineopt = "both" -- enable cursorline for both screen line and line number
 vim.o.termguicolors = true -- enable 24-bit colors
 vim.o.signcolumn = "yes" -- always show sign column (for git/gitsigns)
@@ -36,7 +36,7 @@ vim.o.undodir = vim.fn.stdpath "data" .. "/undo" -- undo file location
 
 -- Clipboard
 vim.o.clipboard = "unnamedplus" -- use system clipboard
-
+vim.opt.mouse = "a" -- enable mouse support
 -- Splits
 vim.o.splitright = true -- vertical splits open to the right
 vim.o.splitbelow = true -- horizontal splits open below

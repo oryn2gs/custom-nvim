@@ -2,15 +2,25 @@
 -- https://github.com/akinsho/toggleterm.nvim
 return {
   {
-    'akinsho/toggleterm.nvim',
+    "akinsho/toggleterm.nvim",
     version = "*",
-    lazy=false,
-    keys = function() 
-      local  term_modes = {"n", "t"}
+    lazy = false,
+    keys = function()
+      local term_modes = { "n", "t" }
       return {
-        { "<leader>tt","<cmd>ToggleTerm direction=vertical<CR>", mode = term_modes, desc = "Terminal toggle default(vertical)"},
-        { "<leader>tT","<cmd>ToggleTerm direction=horizontal<CR>", mode = term_modes, desc = "Terminal toggle horizontal"},
-        { "<leader>tf","<cmd>ToggleTerm direction=float<CR>", mode = term_modes, desc = "Terminal toggle floating"},
+        {
+          "<leader>tt",
+          "<cmd>ToggleTerm direction=vertical<CR>",
+          mode = term_modes,
+          desc = "Terminal toggle default(vertical)",
+        },
+        {
+          "<leader>tT",
+          "<cmd>ToggleTerm direction=horizontal<CR>",
+          mode = term_modes,
+          desc = "Terminal toggle horizontal",
+        },
+        { "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", mode = term_modes, desc = "Terminal toggle floating" },
         -- { '<Esc>', [[<C-\><C-n>]],  noremap = true, silent = true, mode= "t"},
       }
     end,
@@ -31,13 +41,15 @@ return {
         -- not natively supported but implemented in this plugin.
         border = "single", -- 'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open
         -- like `size`, width, height, row, and col can be a number or function which is passed the current terminal
-        width = function() return math.floor(vim.o.columns * 0.8) end,
-        height = function() return math.floor(vim.o.lines * 0.8) end,
+        width = function()
+          return math.floor(vim.o.columns * 0.8)
+        end,
+        height = function()
+          return math.floor(vim.o.lines * 0.8)
+        end,
         winblend = 50,
-        title_pos = 'center',-- 'left' | 'center' | 'right', position of the title of the floating window
+        title_pos = "center", -- 'left' | 'center' | 'right', position of the title of the floating window
       },
-    }
-  }
-
+    },
+  },
 }
-

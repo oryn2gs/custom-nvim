@@ -20,10 +20,6 @@ map("n", "<C-c>", "<cmd>%y+<CR>", opts "Copy whole file")
 map("i", "jj", "<ESC>", opts "Exit insert mode")
 map("n", "<Esc>", "<cmd>noh<CR>", opts "general clear search highlights")
 
--- Move insert cursor to beginning/end of line without leaving insert mode
-map("n", "<leader>hh", "<ESC>^i", opts "Insert mode: move to beginning of line")
-map("n", "<leader>ll", "<ESC>$a", opts "Insert mode: move to end of line")
-
 --- Toggle line numbers
 map("n", "<leader>nN", "<cmd>set nu!<CR>", opts "toggle line number")
 map("n", "<leader>nn", "<cmd>set rnu!<CR>", opts "toggle relative number")

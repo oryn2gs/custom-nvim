@@ -1,11 +1,11 @@
 -- plugins/init.lua
--- 
+--
 --
 
 return {
 
-  -- nvim colorizer -- 
-  -- color highlighter for your buffers, e.g(#000 will renders black color) 
+  -- nvim colorizer --
+  -- color highlighter for your buffers, e.g(#000 will renders black color)
   {
     "nvchad/nvim-colorizer.lua",
     config = function()
@@ -22,17 +22,16 @@ return {
   {
     "mbbill/undotree",
     keys = {
-      { "<leader>ut","<cmd>UndotreeToggle<CR>", desc = "Undo tree toggle"}
+      { "<leader>ut", "<cmd>UndotreeToggle<CR>", desc = "Undo tree toggle" },
     },
     config = function()
       -- plugin options: https://github.com/mbbill/undotree/blob/master/plugin/undotree.vim#L27
-      vim.g.undotree_WindowLayout = 4   -- window layout 1 | 2 | 3 | 4
-      vim.g.undotree_SetFocusWhenToggle = 1   
-      vim.g.undotree_TreeNodeShape = "•"  
-      vim.g.undotree_DiffAutoOpen = 1  -- opens diff window automatically
-      vim.g.undotree_SplitWidth=50
+      vim.g.undotree_WindowLayout = 4 -- window layout 1 | 2 | 3 | 4
+      vim.g.undotree_SetFocusWhenToggle = 1
+      vim.g.undotree_TreeNodeShape = "•"
+      vim.g.undotree_DiffAutoOpen = 1 -- opens diff window automatically
+      vim.g.undotree_SplitWidth = 50
       vim.g.undotree_DiffpanelHeight = 20
     end,
   },
-
 }
